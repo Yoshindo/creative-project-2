@@ -32,22 +32,24 @@
         
         <div class="search-container">
             
-            <div class="logo">
+           
+            <div class="search-text">
                 
-             <img id="logo" src="katana.png" alt="Katana Icon">
+                <h3>Choose</h3>
+                <h3>Your</h3>
+                <h3>Weapon</h3>
                 
             </div>
             
             <div class="search-bar">
                 
-                <input id="input" type="search" required="required">
-                <span>Choose Your Weapon</span>
+                <input id="word" type="text"  required="required">
                 
             </div>
             
             <div class="search-button">
                 
-                <button id="button" class="button">
+                <button id="button" class="button" onclick="wordLookupFunction()" value="Lookup..." title="Do a Dictionary Lookup">
                     
                     <img class ="logo" src="knife.png" alt="Knife Icon">
                     
@@ -61,31 +63,17 @@
             
             <div class="dictionary">
                 
-                <div class="content-header">Dictionary</div>
+                <div id="content-header" class="content-header">Dictionary</div>
                 
-                <div class="content-item"></div>
+                <div id="p1" class="content-item"></div>
                 
-                <div class="content-item"></div>
+                <div id="n1" class="content-item"></div>
                 
-                <div class="content-item"></div>
+                <div id="v1" class="content-item"></div>
                 
-                <div class="content-item"></div>
+                <div id="inter1" class="content-item"></div>
                 
-            </div>
-            
-            <div class="thesaurus">
-                
-                <div class="content-header">Thesaurus</div>
-                
-                <div class="content-item"></div>
-                
-                <div class="content-item"></div>
-                
-                <div class="content-item"></div>
-                
-                <div class="content-item"></div>
-                
-                
+                <div id="p4" class="content-item"></div>
                 
             </div>
             

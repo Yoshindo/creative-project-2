@@ -1,22 +1,43 @@
-document.getElementById("button").addEventListener("click", function(event) {
-  event.preventDefault();
-  const value = document.getElementById("input").value;
-  if (value === "")
-    return;
-    
+function wordLookupFunction() {
+            var apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/hello';
+            var wordValue = document.getElementById('word').value
+            apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + wordValue;
+            fetch(apiUrl).then(response => {
+                return response.json();
+            }).then(data => {
+                // Work with JSON data here
+                console.log(data);
+                document.getElementById("p1").innerHTML = 'Word: ' + capitalizeFirstLetter(data[0].word);
 
-  const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'a7390ccd3bmsha56b24bae4d07a1p13a4dajsn227b8e9993f5',
-		'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-	}
-    };
+                var nounStr = '';
+                var verbStr = '';
+                var interjectionStr = '';
 
-  fetch('https://wordsapiv1.p.rapidapi.com/words/' + value + '/typeOf', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
-  
-    
-});
+                for (let i = 0; i < data.length; i++) {
+                    for (let j = 0; j < data[i].meanings.length; j++) {
+                        var partOfSpeech = data[i].meanings[j].partOfSpeech;
+                        partOfSpeech = capitalizeFirstLetter(partOfSpeech);
+
+                        for (let k = 0; k < data[i].meanings[j].definitions.length; k++) {
+                            var definition = data[i].meanings[j].definitions[k];
+
+                            if (partOfSpeech.toLowerCase() === 'noun')
+                                nounStr += partOfSpeech + ' : ' + definition.definition + '<br/>';
+                            else if (partOfSpeech.toLowerCase() === 'verb')
+                                verbStr += partOfSpeech + ' : ' + definition.definition + '<br/>';
+                            else if (partOfSpeech.toLowerCase() === 'interjection')
+                                interjectionStr += partOfSpeech + ' : ' + definition.definition + '<br/>';
+                        }
+                    }
+                }
+                document.getElementById("n1").innerHTML = nounStr;
+                document.getElementById("v1").innerHTML = verbStr;
+                document.getElementById("inter1").innerHTML = interjectionStr;
+            }).catch(err => {
+                // Do something for an error here
+            });
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
